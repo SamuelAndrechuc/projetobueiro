@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "framer-motion": "^11.0.20",
+    "glitch-text": "^1.6.1",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-text-hacked": "^1.0.5",
     "styled-components": "^6.1.8"
   },
   "devDependencies": {

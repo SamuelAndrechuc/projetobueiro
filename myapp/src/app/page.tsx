@@ -1,76 +1,83 @@
-import React from "react";
-import ImageLogo from "../../public/logo.png";
+'use client';
+import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import StyledLink from "../../public/components/StyledLink";
+import ImageLogo from "../../public/logo.png";
 import ImageMeio from "../../public/meio.png";
+import BandeiraBRPretaVermelha from "../../public/bandeira.png";
+import TextHackedEffectComponent from 'react-text-hacked';
+import { GlitchText } from 'glitch-text';
 
-const LandingPage: React.FC = () => {
+
+const Header = () => (
+  <header className="w-full flex justify-between items-center px-8">
+    <Image src={ImageLogo} alt="Logo da empresa" width={60} height={60} className="rounded-lg" />
+    <nav className="text-xl font-bold font-ibmPlexMono">
+      <ul className="flex gap-8">
+        <li><StyledLink href="#">Quem somos</StyledLink></li>
+        <li><StyledLink href="#">Serviços</StyledLink></li>
+        <li><StyledLink href="#">Contato</StyledLink></li>
+      </ul>
+    </nav>
+    <Image src={BandeiraBRPretaVermelha} alt="Bandeira do Brasil Preta e Vermelha" width={50} height={30} />
+  </header>
+);
+
+const LandingPage = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [key, setKey] = useState(0);
+
+  const toggleHover = (hovered: boolean | ((prevState: boolean) => boolean)) => {
+    setIsHovered(hovered);
+    setKey(prevKey => prevKey + 1);
+  };
+
   return (
-    <div className="relative bg-black text-white min-h-screen pt-16">
-      <div className="text-white text-center flex flex-col md:flex-row justify-center font-bold gap-8 text-xl">
-        <Link className="" href={"#"}>
-          <h2 className="hover:text-2xl hover:shadow-md duration-700 cursor-pointer font-ibmPlexMono">
-            Quem somos
-          </h2>
-        </Link>
-        <Link className="" href={"#"}>
-          <h2 className="hover:text-2xl hover:shadow-md duration-700 cursor-pointer font-ibmPlexMono">
-            Serviços
-          </h2>
-        </Link>
-        <Link className="" href={"#"}>
-          <h2 className="hover:text-2xl hover:shadow-md duration-700 cursor-pointer font-ibmPlexMono">
-            Contato
-          </h2>
-        </Link>
-      </div>
-      <div className="absolute top-0 left-0 m-8">
-        <Image
-          className="rounded-lg w-24"
-          src={ImageLogo}
-          alt="Logo"
-          width={100}
-          height={100}
-        />
-      </div>
-      <div className="flex flex-col md:flex-row items-center justify-between mt-8 mx-8">
-        <div className="text-center md:text-left pr-9 p-9">
-          <h1 className="text-4xl font-bold mb-4 font-ibmPlexMono">
-          A segurança que você precisa, contra as <span style={{color:"red"}}>ameaças</span> que você não conhece.</h1>
-          <p className="text-lg mb-8 font-ibmPlexMono">
-          Garantindo a segurança dos seus dados, mesmo nos esgotos da internet.          
-          </p>
-          <button className="bg-red-600 hover:bg-red-800 hover:p-4 text-xl duration-500 text-white p-4 rounded-lg shadow-md shadow-red-600 font-ibmPlexMono">
-            <Link href={"#email"}>Fale com nosso time</Link>
-          </button>
-        </div>
-        <div className="flex justify-center md:justify-end">
-          <div className="mt-12">
-            <Image
-              className="rounded-lg w-[30%]"
-              src={ImageMeio}
-              alt="ImagemMeio"
-              width={800}
-              height={800}
-            />
-          </div>
-        </div>
-      </div>
-      <div className="text-center mt-32 p-5 text-lg w-[100%]" id="sobre">
-        <h1 className="text-3xl font-bold font-ibmPlexMono">Conheça nossos serviços</h1>
-        <br />
-        <p className="text-xl font-bold font-ibmPlexMono">
-        Seja qual for sua necessidade, nós temos a solução ideal.        </p>
-        <div className="flex justify-around items-center p-5 mt-12">
-         
-          <div>
-            <h1 className="w-64 text-xl font-bold font-ibmPlexMono">
-              Nossos cases de sucesso incluem clientes de todo o Brasil, como a
-              Paratodos em Xique-Xique - BA
-            </h1>
-          </div>
-        </div>
-      </div>
+    <div className="bg-black text-white min-h-screen flex flex-col items-center justify-center pt-4 lg:pt-16">
+      <Header />
+      <main className="text-center mt-16 md:mt-24 lg:mt-32 max-w-4xl px-4">
+        <h1 className="text-3xl lg:text-5xl font-bold mb-6 font-ibmPlexMono">
+          A segurança que você precisa, contra as <span className="text-red-500 glitch" data-text="ameaças">ameaças</span> que você não conhece.
+        </h1>
+        <p className="text-lg lg:text-2xl mb-8 font-ibmPlexMono mt-20">
+          Garantindo a segurança dos seus dados, mesmo nos esgotos da internet.
+        </p>
+        <button 
+          className="button" 
+          onMouseEnter={() => toggleHover(true)}
+          onMouseLeave={() => toggleHover(false)}
+        >
+          <TextHackedEffectComponent 
+            key={key}
+            defaultText="Fale com nosso time" 
+            startOnHover={isHovered} 
+          />
+        </button>
+      </main>
+      <Image src={ImageMeio} alt="ImagemRatoPC" width={450} height={450} className="rounded-lg my-12 md:my-24" />
+      <section className="text-center text-lg lg:text-xl w-full px-4 lg:px-0 mt-12 lg:mt-10">
+        <h2 className="text-2xl lg:text-4xl font-bold font-ibmPlexMono">Conheça nossos serviços!</h2>
+        <p className="mt-2 lg:mt-4 font-ibmPlexMono">
+          Seja qual for sua necessidade, nós temos a solução ideal.
+        </p>
+      </section>
+      <style jsx>{`
+        .button {
+          background-color: #FF0000;
+          border: none;
+          border-radius: 5px;
+          padding: 10px 20px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          color: #FFFFFF;
+          font-size: 16px;
+          display: inline-block; // Adicionado para melhorar a apresentação
+        }
+
+        .button:hover {
+          background-color: #FF3333;
+        }
+      `}</style>
     </div>
   );
 };
