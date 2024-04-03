@@ -7,6 +7,7 @@ import ImageMeio from "../../public/meio.png";
 import BandeiraBRPretaVermelha from "../../public/bandeira.png";
 import TextHackedEffectComponent from 'react-text-hacked';
 import { GlitchText } from 'glitch-text';
+import { Carousel } from "../app/components/carousel/index";
 
 
 const Header = () => (
@@ -61,6 +62,7 @@ const LandingPage = () => {
           Seja qual for sua necessidade, nós temos a solução ideal.
         </p>
       </section>
+      <Carousel />
       <style jsx>{`
         .button {
           background-color: #FF0000;
