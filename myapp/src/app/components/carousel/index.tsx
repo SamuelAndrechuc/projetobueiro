@@ -1,39 +1,43 @@
-import React, { useEffect } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import "./style.css";
-import TK from "../../../../public/meio.png";
+import * as React from "react";
+import ratao from "../../../../public/meio.png";
+import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-import { SiHackaday } from "react-icons/si";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
-export function Carousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
-
-  useEffect(() => {
-    if (emblaApi) {
-      console.log(emblaApi.slideNodes()); // Access API
-    }
-  }, [emblaApi]);
-
+export function CarouselSize() {
   return (
-    <div className="embla" ref={emblaRef}>
-      <div className="embla__container">
-        <div className="embla__slide">
-          <div className="flex flex-col">
-            <section className="flex">
-              <h1>AppSec</h1>
-              <SiHackaday />
-            </section>
-            <h2>
-              Segurança de Aplicativos (AppSec): Protegendo Seu Negócio Online O
-              Que É AppSec? AppSec é a prática de proteger aplicativos contra
-              ameaças de segurança, garantindo que eles sejam resilientes a
-              ataques maliciosos.
-            </h2>
-          </div>
-        </div>
-        <div className="embla__slide">Slide 2</div>
-        <div className="embla__slide">Slide 3</div>
-      </div>
-    </div>
+    <Carousel
+      opts={{
+        align: "start",
+      }}
+      className="w-full max-w-sm"
+    >
+      <CarouselContent className="mb-32">
+        <CarouselItem className="basis-2/3">
+          <Image src={ratao} alt="ratao" />
+        </CarouselItem>
+        <CarouselItem className="basis-2/3">
+          <Image src={ratao} alt="ratao" />
+        </CarouselItem>
+        <CarouselItem className="basis-2/3">
+          <Image src={ratao} alt="ratao" />
+        </CarouselItem>
+        <CarouselItem className="basis-2/3">
+          <Image src={ratao} alt="ratao" />
+        </CarouselItem>
+        <CarouselItem className="basis-2/3">
+          <Image src={ratao} alt="ratao" />
+        </CarouselItem>
+        <CarouselItem className="basis-2/3">
+          <Image src={ratao} alt="ratao" />
+        </CarouselItem>
+      </CarouselContent>
+    </Carousel>
   );
 }
